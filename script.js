@@ -91,10 +91,10 @@ const initialize = () => {
   document.addEventListener('keyup', handleKeyUp);
 }
 
-const closeWindow = () => {
+const unloadWindow = () => {
   localStorage.clear();
   localStorage.setItem('lang', state.currentLanguage);
 }
 
 window.onload = initialize;
-window.onbeforeunload = closeWindow;
+window.onbeforeunload = unloadWindow;
