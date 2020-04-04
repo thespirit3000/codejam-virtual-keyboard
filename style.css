@@ -4,7 +4,13 @@ body {
     background-color: #d1d1d1;
 }
 
+.text_uppercase{
+    text-transform: uppercase;
+}
 
+.text_normal{
+    text-transform: none;
+}
 
 .wrapper {
     width: 100%;
