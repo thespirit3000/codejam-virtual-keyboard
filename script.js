@@ -2,13 +2,16 @@
 // import Modal from './modules/Modal.js';
 
 let state = {
-  currentLanguage: 'ru',
+  currentLanguage: 'en',
   changeLanguage() {
     if (this.currentLanguage == 'ru') {
       this.currentLanguage = 'en'
     }else{
       this.currentLanguage = 'ru'
     }
+  },
+  setLanguage(language) {
+    this.currentLanguage = language;
   }
 };
 
@@ -75,13 +78,23 @@ const handleKeyUp = event => {
 
 }
 const initialize = () => {
+  if (!localStorage.getItem('lang')) {
+    localStorage.setItem('lang', 'en')
+  };
+  const storedLanguage = localStorage.getItem('lang');
+  state.setLanguage(storedLanguage);
   const toShow = document.querySelectorAll(`.${state.currentLanguage}`);
   toShow.forEach(element=> {
     element.classList.toggle('hide')
   })
   document.addEventListener('keydown', handleKeyDown);
   document.addEventListener('keyup', handleKeyUp);
+}
 
+const closeWindow = () => {
+  localStorage.clear();
+  localStorage.setItem('lang', state.currentLanguage);
 }
 
 window.onload = initialize;
+window.onbeforeunload = closeWindow;
