@@ -1,8 +1,7 @@
-// import MobileMenu from './modules/MobileMenu.js';
-// import Modal from './modules/Modal.js';
 import {
   keyCode
 } from './modules/keys.js';
+
 import {
   domArray,
   setUpperCaseClass,
@@ -10,7 +9,10 @@ import {
   toggleKeyCase
 } from './modules/helpers.js'
 
-
+import {
+  renderHTML,
+  renderFooter
+} from './modules/render.js'
 
 let state = {
   currentLanguage: 'en',
@@ -59,13 +61,14 @@ const handleKeyUp = event => {
       setLowerCaseClass(element);
     })
   };
-
   if (event.key === 'Shift') {
     toggleKeyCase(keysNodeList, 'text_uppercase')
   }
-
 }
+
 const initialize = () => {
+  renderHTML();
+  renderFooter();
   if (!localStorage.getItem('lang')) {
     localStorage.setItem('lang', 'en')
   };
@@ -77,7 +80,6 @@ const initialize = () => {
   })
   document.addEventListener('keydown', handleKeyDown);
   document.addEventListener('keyup', handleKeyUp);
-  console.log(keyCode);
 }
 
 const unloadWindow = () => {
