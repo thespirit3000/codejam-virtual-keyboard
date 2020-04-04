@@ -5,11 +5,22 @@ body {
     background-color: #d1d1d1;
 }
 
-.text_uppercase{
+.text-area {
+    margin-top: 10px;
+    width: 100%;
+    height: 30%;
+    resize: none;
+    border: 1px solid #423c3c;
+    border-radius: 0.5rem;
+    background-color: gainsboro;
+
+}
+
+.text_uppercase {
     text-transform: uppercase;
 }
 
-.text_normal{
+.text_normal {
     text-transform: none;
 }
 
@@ -20,6 +31,16 @@ body {
     padding-right: 40px;
     margin: 0 auto;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.width-wrapper{
+    max-width: 1020px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .keyboard {
@@ -28,7 +49,8 @@ body {
     border: 1px solid #423c3c;
     border-radius: 0.5rem;
     background-color: gainsboro;
-    margin-top: 40%;
+    margin-top: 50px;
+    width: 100%;
 }
 
 .button {
@@ -69,4 +91,9 @@ body {
     opacity: 1;
     z-index: 1;
     transition: opacity .3s linear;
+}
+
+.footer{
+    text-align: center;
+    line-height: 0.5rem;
 }
