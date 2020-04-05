@@ -27,12 +27,13 @@ const state = {
 };
 const keysNodeList = domArray('.button_overlay');
 
+
 // -----------Event Handlers-----------------------
 const handleClick = (event) => {
   if (event.target.classList.contains('button')) {
     const { id } = event.target;
     const active = event.target.querySelector(`.${state.currentLanguage}`);
-    const clickEvent = new KeyboardEvent('keyup', { code: `${id}`, key: `${active.innerText}`});
+    const clickEvent = new KeyboardEvent('keydown', { code: `${id}`, key: `${active.innerText}` });
     document.dispatchEvent(clickEvent);
   }
 };
@@ -48,7 +49,8 @@ const handleKeyDown = (event) => {
     });
     state.changeLanguage();
   }
-  document.querySelector('.text-area');
+  const textArea = document.querySelector('.text-area');
+  textArea.value += event.key;
 };
 
 const handleKeyUp = (event) => {
@@ -85,7 +87,7 @@ const initialize = () => {
     element.classList.toggle('hide');
   });
   document.addEventListener('mousedown', handleClick);
-  document.addEventListener('mouseup', handleClick);
+  //document.addEventListener('mouseup', handleClick);
   document.addEventListener('keydown', handleKeyDown);
   document.addEventListener('keyup', handleKeyUp);
 };
