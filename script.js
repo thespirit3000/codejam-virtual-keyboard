@@ -60,7 +60,10 @@ const handleKeyDown = (event) => {
   const textArea = document.querySelector('.text-area');
   const activeKey = document.querySelector(`#${event.code}`);
   activeKey.classList.add('button--active');
-  if (event.keyCode >= 49) {
+  if (event.keyCode >= 49 && event.keyCode < 91) {
+    textArea.value += activeKey.querySelector(`.${state.currentLanguage}`).innerText;
+  }
+  if (event.keyCode >= 36 && event.keyCode < 51) {
     textArea.value += activeKey.querySelector(`.${state.currentLanguage}`).innerText;
   }
 };
