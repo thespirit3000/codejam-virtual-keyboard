@@ -47,7 +47,7 @@ const handleClick = (event) => {
 };
 
 const handleKeyDown = (event) => {
-  const keysNodeList = domArray('.button_overlay');
+  const keysNodeList = domArray('.print');
   event.preventDefault();
   if (event.key === 'Shift' && event.repeat === false) {
     toggleKeyCase(keysNodeList, 'text_uppercase');
@@ -66,7 +66,7 @@ const handleKeyDown = (event) => {
 };
 
 const handleKeyUp = (event) => {
-  const keysNodeList = domArray('.button_overlay');
+  const keysNodeList = domArray('.print');
   event.preventDefault();
   if (event.key === 'CapsLock' && event.getModifierState('CapsLock')) {
     keysNodeList.forEach((element) => {
