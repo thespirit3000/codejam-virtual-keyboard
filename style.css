@@ -37,7 +37,7 @@ body {
     flex-direction: column;
 }
 
-.width-wrapper{
+.width-wrapper {
     max-width: 1020px;
     width: 100%;
     margin: 0 auto;
@@ -49,12 +49,17 @@ body {
     border: 1px solid #423c3c;
     border-radius: 0.5rem;
     background-color: gainsboro;
-    margin-top: 50px;
+    margin: 0 auto;
+    max-width: 1020px;
     width: 100%;
 }
 
+.keyboard-row {
+    display: flex;
+    justify-content: space-between;
+}
+
 .button {
-    width: 6%;
     height: 3rem;
     background: #d1d1d1;
     border: 2px solid #464646;
@@ -65,6 +70,15 @@ body {
     justify-content: center;
     align-items: center;
     position: relative;
+}
+.button-normal{
+    width: 6%;
+}
+.button-wide{
+    width: 12%;
+}
+.button-space{
+    width: 55%;
 }
 
 .button:hover {
@@ -88,12 +102,19 @@ body {
 
 .button_overlay {
     position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
     opacity: 1;
     z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: opacity .3s linear;
 }
 
-.footer{
+.footer {
     text-align: center;
     line-height: 0.5rem;
 }
