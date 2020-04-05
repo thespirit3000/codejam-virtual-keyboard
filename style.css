@@ -13,7 +13,8 @@ body {
     border: 1px solid #423c3c;
     border-radius: 0.5rem;
     background-color: gainsboro;
-
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .text_uppercase {
