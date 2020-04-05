@@ -57,6 +57,7 @@ body {
 .keyboard-row {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .button {
@@ -82,16 +83,18 @@ body {
 }
 
 .button:hover {
-    background: #4d4d2d;
+    border: 2px solid #f4b300;
+    background: #f4b300;
     color: #e5ffcc;
 }
 
 .button:active,
 .button-wide:active,
 .button-space:active {
-    -webkit-transform: scale(0.9);
-    transform: scale(0.9);
-    background: #4d4d2d;
+    
+    background: #f4b300;
+    border: 2px solid #f4b300;
+    transform: scaleY(0.7);
     color: #e5ffcc;
 }
 
