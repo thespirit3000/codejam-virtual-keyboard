@@ -1,5 +1,6 @@
 export default [
   [{
+    type: 'print',
     id: 'Backquote',
     ru: 'ё',
     en: '`',
@@ -7,6 +8,7 @@ export default [
     width: 'button-normal',
   },
   {
+    type: 'print',
     id: 'Digit1',
     ru: '1',
     en: '1',
@@ -14,6 +16,7 @@ export default [
     width: 'button-normal',
   },
   {
+    type: 'print',
     id: 'Digit2',
     ru: '2',
     en: '2',
@@ -21,6 +24,7 @@ export default [
     width: 'button-normal',
   },
   {
+    type: 'print',
     id: 'Digit3',
     ru: '3',
     en: '3',
@@ -28,6 +32,7 @@ export default [
     width: 'button-normal',
   },
   {
+    type: 'print',
     id: 'Digit4',
     ru: '4',
     en: '4',
@@ -35,6 +40,7 @@ export default [
     width: 'button-normal',
   },
   {
+    type: 'print',
     id: 'Digit5',
     ru: '5',
     en: '5',
@@ -42,6 +48,7 @@ export default [
     width: 'button-normal',
   },
   {
+    type: 'print',
     id: 'Digit6',
     ru: '6',
     en: '6',
@@ -49,6 +56,7 @@ export default [
     width: 'button-normal',
   },
   {
+    type: 'print',
     id: 'Digit7',
     ru: '7',
     en: '7',
@@ -56,6 +64,7 @@ export default [
     width: 'button-normal',
   },
   {
+    type: 'print',
     id: 'Digit8',
     ru: '8',
     en: '8',
@@ -63,6 +72,7 @@ export default [
     width: 'button-normal',
   },
   {
+    type: 'print',
     id: 'Digit9',
     ru: '9',
     en: '9',
@@ -70,6 +80,7 @@ export default [
     width: 'button-normal',
   },
   {
+    type: 'print',
     id: 'Digit0',
     ru: '0',
     en: '0',
@@ -77,6 +88,7 @@ export default [
     width: 'button-normal',
   },
   {
+    type: 'print',
     id: 'Minus',
     ru: '-',
     en: '-',
@@ -84,6 +96,7 @@ export default [
     width: 'button-normal',
   },
   {
+    type: 'print',
     id: 'Equal',
     ru: '=',
     en: '=',
@@ -120,7 +133,7 @@ export default [
   {
     type: 'print',
     id: 'KeyE',
-    ru: 'У',
+    ru: 'у',
     en: 'e',
     width: 'button-normal',
   },
@@ -174,18 +187,21 @@ export default [
     width: 'button-normal',
   },
   {
+    type: 'print',
     id: 'BracketLeft',
     ru: 'х',
     en: '{',
     width: 'button-normal',
   },
   {
+    type: 'print',
     id: 'BracketRight',
     ru: 'ъ',
     en: '}',
     width: 'button-normal',
   },
   {
+    type: 'print',
     id: 'Backslash',
     ru: '\x5c',
     en: '\x5c',
@@ -268,6 +284,7 @@ export default [
 
   },
   {
+    type: 'print',
     id: 'Semicolon',
     ru: 'ж',
     en: ';',
@@ -275,6 +292,7 @@ export default [
 
   },
   {
+    type: 'print',
     id: 'Quote',
     ru: 'э',
     en: "'",
@@ -344,24 +362,28 @@ export default [
     width: 'button-normal',
   },
   {
+    type: 'print',
     id: 'Comma',
     ru: 'б',
     en: ',',
     width: 'button-normal',
   },
   {
+    type: 'print',
     id: 'Period',
     ru: 'ю',
     en: '.',
     width: 'button-normal',
   },
   {
+    type: 'print',
     id: 'Slash',
     ru: '.',
     en: '/',
     width: 'button-normal',
   },
   {
+    type: 'print',
     id: 'ArrowUp',
     ru: '▲',
     en: '▲',
@@ -405,18 +427,21 @@ export default [
     width: 'button-normal',
   },
   {
+    type: 'print',
     id: 'ArrowLeft',
     ru: '◄',
     en: '◄',
     width: 'button-normal',
   },
   {
+    type: 'print',
     id: 'ArrowDown',
     ru: '▼',
     en: '▼',
     width: 'button-normal',
   },
   {
+    type: 'print',
     id: 'ArrowRight',
     ru: '►',
     en: '►',
