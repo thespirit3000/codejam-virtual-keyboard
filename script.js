@@ -59,9 +59,10 @@ const handleKeyDown = (event) => {
     state.changeLanguage();
   }
   const textArea = document.querySelector('.text-area');
-  console.log(event);
+  const activeKey = document.querySelector(`#${event.code}`);
+  activeKey.classList.add('button--active');
   if (event.keyCode >= 49) {
-    textArea.value += event.key;
+    textArea.value += activeKey.querySelector(`.${state.currentLanguage}`).innerText;
   }
 };
 
@@ -74,8 +75,8 @@ const handleKeyUp = (event) => {
     });
   }
   if (
-    event.key === 'CapsLock'
-    && event.getModifierState('CapsLock') === false
+    event.key === 'CapsLock' &&
+    event.getModifierState('CapsLock') === false
   ) {
     keysNodeList.forEach((element) => {
       setLowerCaseClass(element);
@@ -84,6 +85,8 @@ const handleKeyUp = (event) => {
   if (event.key === 'Shift') {
     toggleKeyCase(keysNodeList, 'text_uppercase');
   }
+  const activeKey = document.querySelector(`#${event.code}`);
+  activeKey.classList.remove('button--active');
 };
 // -----------Initialization-----------------------
 const initialize = () => {
@@ -97,7 +100,6 @@ const initialize = () => {
     row.classList.add('keyboard-row');
     insertElement(row, keyboard);
     element.forEach((key) => {
-      console.log(key);
       const printer = new Print(
         new NormalKey(key),
       );
