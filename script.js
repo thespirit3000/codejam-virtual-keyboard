@@ -35,14 +35,13 @@ const state = {
 // -----------Event Handlers-----------------------
 const handleClick = (event) => {
   if (event.target.classList.contains('print')) {
-    const active = event.target.querySelector(`.${state.currentLanguage}`);
     // const clickEvent = new KeyboardEvent('keydown', {
     //   code: `${id}`,
     //   key: `${active.innerText}`,
     // });
+    // document.dispatchEvent(clickEvent);
     const textArea = document.querySelector('.text-area');
     textArea.value += event.target.innerText;
-    // document.dispatchEvent(clickEvent);
   }
 };
 
@@ -75,8 +74,8 @@ const handleKeyUp = (event) => {
     });
   }
   if (
-    event.key === 'CapsLock' &&
-    event.getModifierState('CapsLock') === false
+    event.key === 'CapsLock'
+    && event.getModifierState('CapsLock') === false
   ) {
     keysNodeList.forEach((element) => {
       setLowerCaseClass(element);
