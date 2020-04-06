@@ -4,9 +4,10 @@ import {
   domArray,
   setUpperCaseClass,
   setLowerCaseClass,
-  toggleKeyCase,
   insertElement,
   createElement,
+  setHideAll,
+  setShowAll,
 } from './modules/helpers.js';
 
 import {
@@ -31,40 +32,47 @@ const state = {
     this.currentLanguage = language;
   },
 };
-
 // -----------Event Handlers-----------------------
 const handleClick = (event) => {
   if (event.target.classList.contains('print')) {
-    // const clickEvent = new KeyboardEvent('keydown', {
-    //   code: `${id}`,
-    //   key: `${active.innerText}`,
-    // });
-    // document.dispatchEvent(clickEvent);
     const textArea = document.querySelector('.text-area');
     textArea.value += event.target.innerText;
   }
 };
 
 const handleKeyDown = (event) => {
+  const textArea = document.querySelector('.text-area');
   const keysNodeList = domArray('.print');
   event.preventDefault();
   if (event.key === 'Shift' && event.repeat === false) {
-    toggleKeyCase(keysNodeList, 'text_uppercase');
+    setHideAll(keysNodeList, 'hide');
+    setShowAll(keysNodeList, `${state.currentLanguage}S`, 'hide');
   }
+
   if (event.ctrlKey && event.altKey) {
-    keysNodeList.forEach((element) => {
-      element.classList.toggle('hide');
-    });
+    setHideAll(keysNodeList, 'hide');
     state.changeLanguage();
+    setShowAll(keysNodeList, `${state.currentLanguage}`, 'hide');
   }
-  const textArea = document.querySelector('.text-area');
+  if (event.key === 'Tab') {
+    textArea.value += '    ';
+  }
+  if (event.code === 'Space') {
+    textArea.value += ' ';
+  }
+  if (event.code === 'Enter') {
+    textArea.value += '\n';
+  }
+  if (event.code === 'Backspace') {
+    textArea.value = textArea.value.slice(0, -1);
+  }
   const activeKey = document.querySelector(`#${event.code}`);
   activeKey.classList.add('button--active');
-  if (event.keyCode >= 49 && event.keyCode < 91) {
-    textArea.value += activeKey.querySelector(`.${state.currentLanguage}`).innerText;
+  if (event.keyCode >= 49 && event.keyCode <= 90) {
+    textArea.value += activeKey.querySelector('.data-active').innerText;
   }
-  if (event.keyCode >= 36 && event.keyCode < 51) {
-    textArea.value += activeKey.querySelector(`.${state.currentLanguage}`).innerText;
+  if (event.keyCode >= 36 && event.keyCode <= 48) {
+    textArea.value += activeKey.querySelector('.data-active').innerText;
   }
 };
 
@@ -85,12 +93,15 @@ const handleKeyUp = (event) => {
     });
   }
   if (event.key === 'Shift') {
-    toggleKeyCase(keysNodeList, 'text_uppercase');
+    setHideAll(keysNodeList, 'hide');
+    setShowAll(keysNodeList, `${state.currentLanguage}`, 'hide');
   }
   const activeKey = document.querySelector(`#${event.code}`);
   activeKey.classList.remove('button--active');
 };
+
 // -----------Initialization-----------------------
+
 const initialize = () => {
   renderHTML();
   const keyboard = createElement('div');
@@ -115,11 +126,9 @@ const initialize = () => {
   const storedLanguage = localStorage.getItem('lang');
   state.setLanguage(storedLanguage);
   const toShow = document.querySelectorAll(`.${state.currentLanguage}`);
-  toShow.forEach((element) => {
-    element.classList.toggle('hide');
-  });
+  setShowAll(toShow, `${state.currentLanguage}`, 'hide');
+
   document.addEventListener('mousedown', handleClick);
-  // document.addEventListener('mouseup', handleClick);
   document.addEventListener('keydown', handleKeyDown);
   document.addEventListener('keyup', handleKeyUp);
 };
@@ -129,5 +138,5 @@ const unloadWindow = () => {
   localStorage.setItem('lang', state.currentLanguage);
 };
 
-window.onload = initialize;
+window.onload = initialize();
 window.onbeforeunload = unloadWindow;
