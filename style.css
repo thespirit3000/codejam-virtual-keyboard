@@ -5,6 +5,10 @@ body {
     background-color: #d1d1d1;
 }
 
+.none{
+    display: none;
+}
+
 .text-area {
     margin-top: 10px;
     width: 100%;
@@ -62,6 +66,7 @@ body {
 }
 
 .button {
+    user-select: none; 
     height: 3rem;
     background: #d1d1d1;
     border: 2px solid #464646;
@@ -115,6 +120,7 @@ body {
 }
 
 .button_overlay {
+    user-select: none; 
     position: absolute;
     left: 0;
     top: 0;
