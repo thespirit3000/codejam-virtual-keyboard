@@ -70,6 +70,14 @@ const handleKeyDown = (event) => {
     setShowAll(keysNodeList, `${state.currentLanguage}S`, 'hide');
   }
 
+  if (event.key === 'Shift' && event.repeat === false && event.getModifierState('CapsLock')) {
+    keysNodeList.forEach((element) => {
+      setHideAll(keysNodeList, 'hide');
+      setShowAll(keysNodeList, `${state.currentLanguage}`, 'hide');
+      setLowerCaseClass(element);
+    });
+  }
+
   if (event.ctrlKey && event.altKey) {
     setHideAll(keysNodeList, 'hide');
     state.changeLanguage();
@@ -137,6 +145,13 @@ const handleKeyUp = (event) => {
   if (event.key === 'Shift') {
     setHideAll(keysNodeList, 'hide');
     setShowAll(keysNodeList, `${state.currentLanguage}`, 'hide');
+  }
+  if (event.key === 'Shift' && event.repeat === false && event.getModifierState('CapsLock')) {
+    keysNodeList.forEach((element) => {
+      setHideAll(keysNodeList, 'hide');
+      setShowAll(keysNodeList, `${state.currentLanguage}S`, 'hide');
+      setLowerCaseClass(element);
+    });
   }
   const activeKey = document.querySelector(`#${event.code}`);
   activeKey.classList.remove('button--active');
