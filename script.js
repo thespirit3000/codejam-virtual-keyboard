@@ -34,9 +34,28 @@ const state = {
 };
 // -----------Event Handlers-----------------------
 const handleClick = (event) => {
-  if (event.target.classList.contains('print')) {
-    const textArea = document.querySelector('.text-area');
-    textArea.value += event.target.innerText;
+  const textArea = document.querySelector('.text-area');
+  textArea.focus();
+  if (event.target.classList.contains('text-area')) {
+    state.cursor = textArea.selectionStart;
+  }
+  if (event.target.classList.contains('button_overlay')) {
+    if (event.target.classList.contains('print')) {
+      textArea.value += event.target.innerText;
+    } else {
+      textArea.selectionStart = state.cursor;
+      textArea.selectionEnd = state.cursor;
+      let clickEvent = new KeyboardEvent('keydown', {
+        code: `${event.target.innerText}`,
+        key: `${event.target.innerText}`,
+      });
+      document.dispatchEvent(clickEvent);
+      clickEvent = new KeyboardEvent('keyup', {
+        code: `${event.target.innerText}`,
+        key: `${event.target.innerText}`,
+      });
+      document.dispatchEvent(clickEvent);
+    }
   }
 };
 
@@ -45,8 +64,9 @@ const handleKeyDown = (event) => {
   const keysNodeList = domArray('.print');
   const activeKey = document.querySelector(`#${event.code}`);
   activeKey.classList.add('button--active');
-  const cursor = textArea.selectionStart;
-  const { length } = textArea.value;
+  const {
+    length,
+  } = textArea.value;
   event.preventDefault();
   if (event.key === 'Shift' && event.repeat === false) {
     setHideAll(keysNodeList, 'hide');
@@ -58,32 +78,35 @@ const handleKeyDown = (event) => {
     state.changeLanguage();
     setShowAll(keysNodeList, `${state.currentLanguage}`, 'hide');
   }
-  if (event.key === 'Tab') {
-    textArea.value = `${textArea.value.slice(0, textArea.selectionStart)
-    }    ${textArea.value.slice(textArea.selectionStart, length)}`;
-    textArea.selectionStart = cursor + 4;
-    textArea.selectionEnd = textArea.selectionStart;
+  if (event.code === 'Tab') {
+    textArea.selectionStart = state.cursor;
+    textArea.selectionEnd = state.cursor;
+    textArea.setRangeText('    ');
+    state.cursor = textArea.selectionStart + 4;
   }
   if (event.code === 'Space') {
-    textArea.value = `${textArea.value.slice(0, textArea.selectionStart)
-    } ${textArea.value.slice(textArea.selectionStart, length)}`;
-    textArea.selectionStart = cursor + 1;
-    textArea.selectionEnd = textArea.selectionStart;
+    textArea.selectionStart = state.cursor;
+    textArea.selectionEnd = state.cursor;
+    textArea.setRangeText(' ');
+    state.cursor = textArea.selectionEnd;
   }
   if (event.code === 'Enter') {
     textArea.value += '\n';
   }
   if (event.code === 'Backspace') {
-    textArea.value = textArea.value.slice(0, textArea.selectionStart - 1)
-    + textArea.value.slice(textArea.selectionStart, length);
-    textArea.selectionStart = cursor - 1;
-    textArea.selectionEnd = textArea.selectionStart;
+    textArea.selectionStart = state.cursor;
+    textArea.selectionEnd = state.cursor;
+    textArea.setRangeText('', textArea.selectionStart - 1, textArea.selectionStart);
+    state.cursor = textArea.selectionStart;
   }
+
   if (event.keyCode >= 49 && event.keyCode <= 90) {
     textArea.value += activeKey.querySelector('.data-active').innerText;
+    state.cursor = textArea.selectionStart;
   }
   if (event.keyCode >= 36 && event.keyCode <= 48) {
     textArea.value += activeKey.querySelector('.data-active').innerText;
+    state.cursor = textArea.selectionStart;
   }
 };
 
@@ -94,6 +117,8 @@ const handleKeyUp = (event) => {
     keysNodeList.forEach((element) => {
       setUpperCaseClass(element);
     });
+    const activeKey = document.querySelector(`#${event.key}`);
+    activeKey.setAttribute('style', 'background:  #f4b300');
   }
   if (
     event.key === 'CapsLock'
@@ -102,6 +127,8 @@ const handleKeyUp = (event) => {
     keysNodeList.forEach((element) => {
       setLowerCaseClass(element);
     });
+    const activeKey = document.querySelector(`#${event.key}`);
+    activeKey.setAttribute('style', 'background:  #d1d1d1');
   }
   if (event.key === 'Shift') {
     setHideAll(keysNodeList, 'hide');
@@ -138,10 +165,10 @@ const initialize = () => {
   state.setLanguage(storedLanguage);
   const toShow = document.querySelectorAll(`.${state.currentLanguage}`);
   setShowAll(toShow, `${state.currentLanguage}`, 'hide');
-  document.addEventListener('mousedown', handleClick);
+  document.addEventListener('click', handleClick);
   document.addEventListener('keydown', handleKeyDown);
   document.addEventListener('keyup', handleKeyUp);
-  document.addEventListener('focus', handleKeyUp);
+  // document.addEventListener('focus', handleKeyUp);
 };
 
 const unloadWindow = () => {
