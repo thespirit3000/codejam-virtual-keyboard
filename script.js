@@ -76,16 +76,12 @@ const handleKeyDown = (event) => {
     setShowAll(keysNodeList, `${state.currentLanguage}`, 'hide');
   }
   if (event.code === 'Tab') {
-    textArea.selectionStart = state.cursor;
-    textArea.selectionEnd = state.cursor;
-    textArea.setRangeText('    ');
-    state.cursor = textArea.selectionStart + 4;
+    textArea.value += '    ';
+    state.cursor = textArea.selectionStart;
   }
   if (event.code === 'Space') {
-    textArea.selectionStart = state.cursor;
-    textArea.selectionEnd = state.cursor;
-    textArea.setRangeText(' ');
-    state.cursor = textArea.selectionEnd;
+    textArea.value += ' ';
+    state.cursor = textArea.selectionStart;
   }
   if (event.code === 'Enter') {
     textArea.value += '\n';
@@ -102,6 +98,14 @@ const handleKeyDown = (event) => {
     state.cursor = textArea.selectionStart;
   }
   if (event.keyCode >= 36 && event.keyCode <= 48) {
+    textArea.value += activeKey.querySelector('.data-active').innerText;
+    state.cursor = textArea.selectionStart;
+  }
+  if (event.keyCode >= 219 && event.keyCode <= 222) {
+    textArea.value += activeKey.querySelector('.data-active').innerText;
+    state.cursor = textArea.selectionStart;
+  }
+  if (event.keyCode >= 186 && event.keyCode <= 192) {
     textArea.value += activeKey.querySelector('.data-active').innerText;
     state.cursor = textArea.selectionStart;
   }
@@ -165,7 +169,6 @@ const initialize = () => {
   document.addEventListener('click', handleClick);
   document.addEventListener('keydown', handleKeyDown);
   document.addEventListener('keyup', handleKeyUp);
-  // document.addEventListener('focus', handleKeyUp);
 };
 
 const unloadWindow = () => {
