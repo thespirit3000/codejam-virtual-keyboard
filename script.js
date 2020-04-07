@@ -43,6 +43,10 @@ const handleClick = (event) => {
 const handleKeyDown = (event) => {
   const textArea = document.querySelector('.text-area');
   const keysNodeList = domArray('.print');
+  const activeKey = document.querySelector(`#${event.code}`);
+  activeKey.classList.add('button--active');
+  const cursor = textArea.selectionStart;
+  const { length } = textArea.value;
   event.preventDefault();
   if (event.key === 'Shift' && event.repeat === false) {
     setHideAll(keysNodeList, 'hide');
@@ -55,19 +59,26 @@ const handleKeyDown = (event) => {
     setShowAll(keysNodeList, `${state.currentLanguage}`, 'hide');
   }
   if (event.key === 'Tab') {
-    textArea.value += '    ';
+    textArea.value = `${textArea.value.slice(0, textArea.selectionStart)
+    }    ${textArea.value.slice(textArea.selectionStart, length)}`;
+    textArea.selectionStart = cursor + 4;
+    textArea.selectionEnd = textArea.selectionStart;
   }
   if (event.code === 'Space') {
-    textArea.value += ' ';
+    textArea.value = `${textArea.value.slice(0, textArea.selectionStart)
+    } ${textArea.value.slice(textArea.selectionStart, length)}`;
+    textArea.selectionStart = cursor + 1;
+    textArea.selectionEnd = textArea.selectionStart;
   }
   if (event.code === 'Enter') {
     textArea.value += '\n';
   }
   if (event.code === 'Backspace') {
-    textArea.value = textArea.value.slice(0, -1);
+    textArea.value = textArea.value.slice(0, textArea.selectionStart - 1)
+    + textArea.value.slice(textArea.selectionStart, length);
+    textArea.selectionStart = cursor - 1;
+    textArea.selectionEnd = textArea.selectionStart;
   }
-  const activeKey = document.querySelector(`#${event.code}`);
-  activeKey.classList.add('button--active');
   if (event.keyCode >= 49 && event.keyCode <= 90) {
     textArea.value += activeKey.querySelector('.data-active').innerText;
   }
@@ -127,10 +138,10 @@ const initialize = () => {
   state.setLanguage(storedLanguage);
   const toShow = document.querySelectorAll(`.${state.currentLanguage}`);
   setShowAll(toShow, `${state.currentLanguage}`, 'hide');
-
   document.addEventListener('mousedown', handleClick);
   document.addEventListener('keydown', handleKeyDown);
   document.addEventListener('keyup', handleKeyUp);
+  document.addEventListener('focus', handleKeyUp);
 };
 
 const unloadWindow = () => {
