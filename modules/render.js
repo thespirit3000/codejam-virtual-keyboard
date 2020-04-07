@@ -1,7 +1,7 @@
 const wrapperNode = () => `
     <div class="wrapper">
-        <h1>codejam-virtual-keyboard</h1>
-        <textarea id='input-text' name="text" class='text-area' rows="10"></textarea>
+        <h2>codejam-virtual-keyboard</h2>
+        <textarea id='input-text' name="text" class='text-area' rows="8"></textarea>
     </div>
     <div id='keyboard' class="wrapper">
     </div>
