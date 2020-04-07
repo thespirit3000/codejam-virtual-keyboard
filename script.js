@@ -64,9 +64,6 @@ const handleKeyDown = (event) => {
   const keysNodeList = domArray('.print');
   const activeKey = document.querySelector(`#${event.code}`);
   activeKey.classList.add('button--active');
-  const {
-    length,
-  } = textArea.value;
   event.preventDefault();
   if (event.key === 'Shift' && event.repeat === false) {
     setHideAll(keysNodeList, 'hide');
