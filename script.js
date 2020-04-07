@@ -87,12 +87,15 @@ const handleKeyDown = (event) => {
     textArea.value += '\n';
   }
   if (event.code === 'Backspace') {
-    textArea.selectionStart = state.cursor;
-    textArea.selectionEnd = state.cursor;
-    textArea.setRangeText('', textArea.selectionStart - 1, textArea.selectionStart);
-    state.cursor = textArea.selectionStart;
+    if (textArea.value.length === 0) {
+      textArea.value = '';
+    } else {
+      textArea.selectionStart = state.cursor;
+      textArea.selectionEnd = state.cursor;
+      textArea.setRangeText('', textArea.selectionStart - 1, textArea.selectionStart);
+      state.cursor = textArea.selectionStart;
+    }
   }
-
   if (event.keyCode >= 49 && event.keyCode <= 90) {
     textArea.value += activeKey.querySelector('.data-active').innerText;
     state.cursor = textArea.selectionStart;
